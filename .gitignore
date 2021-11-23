@@ -1,0 +1,11 @@
+build/
+devel/
+__pycache__/
+CMakeLists.txt
+
+
+.catkin_workspace
+*.vscode
+*.mp4
+*.pyc
+*.pyo
