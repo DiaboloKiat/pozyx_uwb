@@ -17,13 +17,6 @@ cd ~/$PROJECT
 git checkout master
 
 ############################## submodules ####################################
-cd ~/$PROJECT/sensors/vision_opencv
-git checkout melodic
 
-cd ~/$PROJECT/sensors/apriltags_ros
-git checkout indigo-devel
-
-cd ~/$PROJECT/sensors/realsense-ros
-git checkout 2.2.15
 
 cd ~/$REPO
