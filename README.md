@@ -6,9 +6,9 @@ First, install the pypozyx and requests
 
 ```
 $ sudo pip install pypozyx requests         \\ Python 2.7
-
+```
 or
-
+```
 $ sudo pip3 install pypozyx requests        \\ Python 3.4
 ```
 
