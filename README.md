@@ -1,4 +1,4 @@
-<h1 align="center"> pozyx_uwb </h1>
+<h1 align="center"> Pozyx_UWB </h1>
 
 ## How to setup
 
