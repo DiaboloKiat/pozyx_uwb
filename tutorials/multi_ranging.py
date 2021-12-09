@@ -1,15 +1,6 @@
-#!/usr/bin/env python
-
-"""
-The Pozyx ready to range tutorial (c) Pozyx Labs
-Please read the tutorial that accompanies this sketch: https://www.pozyx.io/Documentation/Tutorials/ready_to_range/Python
-This demo requires two Pozyx devices. It demonstrates the ranging capabilities and the functionality to
-to remotely control a Pozyx device. Move around with the other Pozyx device.
-This demo measures the range between the two devices. The closer the devices are to each other, the more LEDs will
-light up on both devices.
-"""
 from pypozyx import (PozyxSerial, PozyxConstants, version,
-                     SingleRegister, DeviceRange, POZYX_SUCCESS, get_first_pozyx_serial_port)
+                     SingleRegister, DeviceRange, POZYX_SUCCESS, 
+                     POZYX_FAILURE, get_first_pozyx_serial_port)
 
 from pypozyx.tools.version_check import perform_latest_version_check
 
@@ -25,6 +16,7 @@ class ReadyToRange(object):
         self.range_step_mm = range_step_mm
         self.remote_id = remote_id
         self.protocol = protocol
+        self.devices = [0x6a60, 0x670c]
 
     def setup(self):
         """Sets up both the ranging and destination Pozyx's LED configuration"""
@@ -37,12 +29,15 @@ class ReadyToRange(object):
         print("- Approach target device to see range and")
         print("led control")
         print("")
-        if self.remote_id is None:
-            for device in [self.remote_id, self.destination_id]:
-                self.pozyx.printDeviceInfo(device)
-        else:
-            for device in [None, self.remote_id, self.destination_id]:
-                self.pozyx.printDeviceInfo(device)
+        # if self.remote_id is None:
+        #     for device in [self.remote_id, self.destination_id]:
+        #         self.pozyx.printDeviceInfo(device)
+        # else:
+        #     for device in [None, self.remote_id, self.destination_id]:
+        #         self.pozyx.printDeviceInfo(device)
+        for device_id in self.devices:
+            self.pozyx.printDeviceInfo(device_id)
+
         print("")
         print("- -----------POZYX RANGING V{} ------------".format(version))
         print("")
@@ -54,6 +49,7 @@ class ReadyToRange(object):
     def loop(self):
         """Performs ranging and sets the LEDs accordingly"""
         device_range = DeviceRange()
+
         status = self.pozyx.doRanging(
             self.destination_id, device_range, self.remote_id)
 
@@ -104,3 +100,11 @@ if __name__ == "__main__":
     while True:
         r.loop()
         time.sleep(0.1)
+
+
+
+
+
+
+
+
