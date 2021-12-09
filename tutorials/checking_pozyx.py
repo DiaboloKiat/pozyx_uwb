@@ -1,9 +1,11 @@
 import pypozyx
+import commands
 
 from pypozyx import PozyxSerial, get_first_pozyx_serial_port, UWBSettings
 from pypozyx import POZYX_SUCCESS, SingleRegister, EulerAngles, Acceleration
 from pypozyx import PozyxConstants
 from pypozyx import Coordinates, DeviceCoordinates
+
 
 #----------------------------------------------------------------------------------------------------------------------
 # Finding your serial port
@@ -152,3 +154,23 @@ if pozyx.saveUWBSettings() != POZYX_SUCCESS:
     print('Pozyx error code: %s' % error_code)
     # the other method returns a descriptive string
     print(pozyx.getSystemError())
+
+remote_id = 0x6a78           # the network ID of the remote device
+remote = False               # whether to use the given remote device for ranging
+if not remote:
+    remote_id = None
+
+print("------------------------------------------------------------")
+if remote_id is None:
+    for device in [remote_id]:
+        pozyx.printDeviceInfo(device)
+else:
+    for device in [None, remote_id]:
+        pozyx.printDeviceInfo(device)
+print("------------------------------------------------------------")
+
+
+print(commands.getstatusoutput("udevadm info -a " + pypozyx.get_first_pozyx_serial_port() + " | grep serial"))
+
+
+
