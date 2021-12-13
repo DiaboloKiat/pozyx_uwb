@@ -114,6 +114,7 @@ class pozyx_node(object):
         status = self.pozyx.getErrorCode(error_code)
         if status == POZYX_SUCCESS:
             rospy.logerr(self.pozyx.getErrorMessage(error_code))
+            print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
         else:
             rospy.logerr("error getting error msg")
 
