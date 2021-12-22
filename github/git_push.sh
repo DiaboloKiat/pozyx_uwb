@@ -5,12 +5,8 @@ git config --global user.email "DiaboloKiat@gmail.com"
 
 git status
 git checkout master
-if [ "${message}" = "" ]
-then
-    echo "Enter your message"
-    read message
-fi
-
+echo "Enter your message"
+read message_pozyx
 
 if [ "$1" = "base" ]
 then
@@ -53,7 +49,7 @@ echo "------------------------------------------push pozyx_uwb------------------
 echo "---------------------------------------------------------------------------------------------------"
 cd ~/$PROJECT
 git add -A
-git commit -m "${message} on pozyx_uwb"
+git commit -m "${message_pozyx} on pozyx_uwb"
 git push
 
 
