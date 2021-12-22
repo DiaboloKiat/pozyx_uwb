@@ -5,8 +5,12 @@ git config --global user.email "DiaboloKiat@gmail.com"
 
 git status
 git checkout master
-echo "Enter your message"
-read message
+if [ "${message}" = "" ]
+then
+    echo "Enter your message"
+    read message
+fi
+
 
 if [ "$1" = "base" ]
 then
