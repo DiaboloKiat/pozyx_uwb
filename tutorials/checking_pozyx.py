@@ -1,5 +1,6 @@
 import pypozyx
-import commands
+# import commands   # python2
+import subprocess   # python3
 
 from pypozyx import PozyxSerial, get_first_pozyx_serial_port, UWBSettings
 from pypozyx import POZYX_SUCCESS, SingleRegister, EulerAngles, Acceleration
@@ -9,11 +10,13 @@ from pypozyx import Coordinates, DeviceCoordinates
 
 #----------------------------------------------------------------------------------------------------------------------
 # Finding your serial port
-print(pypozyx.get_first_pozyx_serial_port())
-print()
+
+print("\n" + pypozyx.get_first_pozyx_serial_port() + "\n")
 
 # Connecting to the Pozyx checking
 serial_port = get_first_pozyx_serial_port()
+
+print("***** Connecting to the Pozyx checking *****")
 
 if serial_port is not None:
     pozyx = PozyxSerial(serial_port)
@@ -22,9 +25,9 @@ if serial_port is not None:
     #print(uwb_settings)
     pozyx.getUWBSettings(uwb_settings)
     # print(uwb_settings)
-    print("Connection success!")
+    print("Connection success!\n")
 else:
-    print("No Pozyx port was found")
+    print("No Pozyx port was found\n")
 
 #----------------------------------------------------------------------------------------------------------------------
 # Reading data
@@ -161,6 +164,8 @@ if not remote:
     remote_id = None
 
 print("------------------------------------------------------------")
+print("***** Show pozyx device information *****")
+
 if remote_id is None:
     for device in [remote_id]:
         pozyx.printDeviceInfo(device)
@@ -170,7 +175,7 @@ else:
 print("------------------------------------------------------------")
 
 
-print(commands.getstatusoutput("udevadm info -a " + pypozyx.get_first_pozyx_serial_port() + " | grep serial"))
-
+print(subprocess.getstatusoutput("udevadm info -a " + pypozyx.get_first_pozyx_serial_port() + " | grep serial"))
+print("\n")
 
 

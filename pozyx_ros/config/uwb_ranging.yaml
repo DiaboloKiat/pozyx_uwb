@@ -1,0 +1,73 @@
+---
+anchor00_tag:
+  anchor: 0x6a46
+anchor01_tag:
+  anchor: 0x6a66
+anchor02_tag:
+  anchor: 0x6a0c
+# anchor03_tag:
+#   anchor: 0x6a57
+# anchor04_tag:
+#   anchor: 0x6744
+# anchor05_tag:
+#   anchor: 0x6a48
+# anchor06_tag:
+#   anchor: 0x6a41
+# anchor07_tag:
+#   anchor: 0x670c
+# anchor08_tag:
+#   anchor: 0x6a78
+# anchor09_tag:
+#   anchor: 0x6a0f
+# anchor10_tag:
+#   anchor: 0x6a4a
+# anchor11_tag:
+#   anchor: 0x6a7a
+# anchor12_tag:
+#   anchor: 0x6a60
+# anchor13_tag:
+#   anchor: 0x6a22
+# anchor14_tag:
+#   anchor: 0x6a21
+# anchor15_tag:
+#   anchor: 0x6a5d
+anchor16_tag:
+  anchor: 0x6a27
+
+anchorballs: # target id, can also be robots
+  anchor00: 0x6a46
+  anchor01: 0x6a66
+  anchor02: 0x6a0c
+  # anchor03: 0x6a57
+  # anchor04: 0x6744
+  # anchor05: 0x6a48
+  # anchor06: 0x6a41
+  # anchor07: 0x670c
+  # anchor08: 0x6a78
+  # anchor09: 0x6a0f
+  # anchor10: 0x6a4a
+  # anchor11: 0x6a7a
+  # anchor12: 0x6a60
+  # anchor13: 0x6a22
+  # anchor14: 0x6a21
+  # anchor15: 0x6a5d
+  anchor16: 0x6a27
+
+anchorballs_count:
+  anchor00: 1
+  anchor01: 2
+  anchor02: 3
+  # anchor03: 4
+  # anchor04: 5
+  # anchor05: 6
+  # anchor06: 7
+  # anchor07: 8
+  # anchor08: 9
+  # anchor09: 10
+  # anchor10: 11
+  # anchor11: 12
+  # anchor12: 13
+  # anchor13: 14
+  # anchor14: 15
+  # anchor15: 16
+  anchor16: 4

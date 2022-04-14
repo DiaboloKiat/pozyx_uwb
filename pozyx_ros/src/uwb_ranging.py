@@ -12,12 +12,13 @@ from pypozyx.tools.discovery import *
 from pypozyx.tools.version_check import *
 from pozyx_ros.msg import DeviceRange as Range
 from pozyx_ros.msg import DeviceRangeArray
+from pozyx_ros.msg import uwb_data
 from std_msgs.msg import Bool
 
 POZYX_PORT = {0x6a46:'369839493436', 0x6a66:'36A4396F3436', 0x6a0c:'365E39493436', \
                 0x6a57:'367A39533436', 0x6744:'325F34893037', 0x6a48:'368C395F3436', \
                 0x6a41:'366139913436', 0x6a42: '366439913436', 0x6e5d: '3961357D3336', \
-                0x6a78:'36A6396F3436', 0x6a60:'367439823436'}
+                0x6a78:'36A6396F3436', 0x6a60:'367439823436', 0x6a27: '366D395F3436'}
 
 class pozyx_node(object):
     def __init__(self):
@@ -81,9 +82,17 @@ class pozyx_node(object):
         print("self.device: ", self.dest_device_list)
 
         # Publisher
-        self.pub_anchor = rospy.Publisher('/ranges', DeviceRangeArray, queue_size=5)
+        self.pub_anchor = rospy.Publisher('ranges', DeviceRangeArray, queue_size=5)
+        
+        #distances are publishing with uwb_data_topic
+        self.pub_data = rospy.Publisher('uwb_data_topic', uwb_data, queue_size=5)
 
     def getDeviceRange(self):
+        self.all_distance = [] 
+        self.all_destination_id = []
+        self.all_stamp = []
+        self.all_rssi = []
+
         for device in self.dest_device_list:
             time_for_arr = rospy.Time.now()
             for tag_p in self.all_pozyx:
@@ -99,7 +108,12 @@ class pozyx_node(object):
                     r.distance = device_range.distance
                     r.RSS = device_range.RSS
 
-                    rospy.loginfo("0x%0.4x\n --------------------\n Distance: %d\n RSSI: %d" %(self.dest_device_list[device], r.distance, r.RSS))
+                    self.all_distance.append(r.distance)
+                    self.all_destination_id.append(r.tag_id)
+                    self.all_stamp.append(r.header.stamp)
+                    self.all_rssi.append(r.RSS)
+
+                    rospy.loginfo("0x%0.4x\n --------------------\n Distance: %d\n RSSI: %d" %(r.tag_id, r.distance, r.RSS))
                     self.pub_msg[tag_p].rangeArray.append(r)
                 else:
                     pass
@@ -108,6 +122,19 @@ class pozyx_node(object):
 
             if 'anchor' in self.pub_msg:
                 self.pub_anchor.publish(self.pub_msg['anchor'])
+
+        #publish data with ROS
+        self.publish_data()
+
+    def publish_data(self):
+        #uwb message type is a special message so that firstly describe this message 
+        uwb_data_cell = uwb_data()
+        uwb_data_cell.destination_id = self.all_destination_id
+        uwb_data_cell.stamp = self.all_stamp
+        uwb_data_cell.distance = self.all_distance
+        uwb_data_cell.rssi = self.all_rssi
+        self.pub_data.publish(uwb_data_cell)
+
 
     def printErrorCode(self):
         error_code = SingleRegister()
@@ -119,7 +146,7 @@ class pozyx_node(object):
             rospy.logerr("error getting error msg")
 
 if __name__ == '__main__':
-    rospy.init_node('radiation_demo',anonymous=False)
+    rospy.init_node('ranging',anonymous=True)
     freq = int(rospy.get_param("~ranging_freq"))
 
     timer = rospy.timer.Rate(freq)

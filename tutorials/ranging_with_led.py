@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 The Pozyx ready to range tutorial (c) Pozyx Labs
@@ -95,7 +95,7 @@ if __name__ == "__main__":
         perform_latest_version_check()
 
     # hardcoded way to assign a serial port of the Pozyx
-    serial_port = '/dev/ttyACM0'
+    serial_port = '/dev/ttyACM1'
 
     # the easier way
     serial_port = get_first_pozyx_serial_port()
@@ -103,12 +103,12 @@ if __name__ == "__main__":
         print("No Pozyx connected. Check your USB cable or your driver!")
         quit()
 
-    remote_id = 0x6a78           # the network ID of the remote device
+    remote_id = 0x6a27           # the network ID of the remote device
     remote = False               # whether to use the given remote device for ranging
     if not remote:
         remote_id = None
 
-    destination_id = 0x6a60      # network ID of the ranging destination
+    destination_id = 0x6a42      # network ID of the ranging destination
     # distance that separates the amount of LEDs lighting up.
     range_step_mm = 1000
 
