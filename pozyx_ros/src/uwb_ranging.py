@@ -20,9 +20,9 @@ POZYX_PORT = {0x6a46:'369839493436', 0x6a66:'36A4396F3436', 0x6a0c:'365E39493436
                 0x6a41:'366139913436', 0x6a42: '366439913436', 0x6e5d: '3961357D3336', \
                 0x6a78:'36A6396F3436', 0x6a60:'367439823436', 0x6a27: '366D395F3436'}
 
-class pozyx_node(object):
+class uwb_ranging(object):
     def __init__(self):
-        super(pozyx_node, self).__init__()
+        super(uwb_ranging, self).__init__()
 
         self.all_ids = rospy.get_param(rospy.get_param("~id_param_name"))
         print('----------------------------------------')
@@ -141,7 +141,6 @@ class pozyx_node(object):
         status = self.pozyx.getErrorCode(error_code)
         if status == POZYX_SUCCESS:
             rospy.logerr(self.pozyx.getErrorMessage(error_code))
-            print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
         else:
             rospy.logerr("error getting error msg")
 
@@ -151,10 +150,10 @@ if __name__ == '__main__':
 
     timer = rospy.timer.Rate(freq)
     try:
-        pozyx_node = pozyx_node()
+        uwb_ranging = uwb_ranging()
         last_t = rospy.Time.now().to_sec()
         while not rospy.is_shutdown():
-            pozyx_node.getDeviceRange()
+            uwb_ranging.getDeviceRange()
             # timer.sleep()
             this_t = rospy.Time.now().to_sec()
             if this_t - last_t > 1:
