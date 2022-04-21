@@ -1,0 +1,4 @@
+[submodule "pozyx_simulation"]
+	path = pozyx_simulation
+	url = git@github.com:DiaboloKiat/pozyx_simulation.git
+	ignore = dirty

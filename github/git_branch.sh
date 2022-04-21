@@ -22,5 +22,8 @@ git checkout master
 
 ############################## submodules ####################################
 
+cd ~/$PROJECT/pozyx_simulation
+git checkout master
+
 
 cd ~/$REPO
