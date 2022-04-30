@@ -33,6 +33,8 @@ anchor02_tag:
 #   anchor: 0x6a5d
 anchor16_tag:
   anchor: 0x6a27
+anchor17_tag:
+  anchor: 0x6a42
 
 anchorballs: # target id, can also be robots
   anchor00: 0x6a46
@@ -52,6 +54,7 @@ anchorballs: # target id, can also be robots
   # anchor14: 0x6a21
   # anchor15: 0x6a5d
   anchor16: 0x6a27
+  anchor17: 0x6a42
 
 anchorballs_count:
   anchor00: 1
@@ -71,3 +74,4 @@ anchorballs_count:
   # anchor14: 15
   # anchor15: 16
   anchor16: 4
+  anchor17: 5

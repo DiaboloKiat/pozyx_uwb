@@ -1,10 +1,11 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import rospy
 import numpy as np
 import random
 import struct
-import subprocess
+import commands   # python2
+# import subprocess   # python3
 
 from pypozyx import *
 from pypozyx.tools.device_list import *
@@ -38,7 +39,8 @@ class uwb_ranging(object):
         
         all_port = {}
         for port in self.port_list:
-            st, output = subprocess.getstatusoutput("udevadm info -a "+port+" | grep serial")
+            st, output = commands.getstatusoutput("udevadm info -a "+port+" | grep serial")
+            # st, output = subprocess.getstatusoutput("udevadm info -a "+port+" | grep serial") 
             print('----------------------------------------')
             print(output)
             print('----------------------------------------')
